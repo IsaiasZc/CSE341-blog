@@ -1,0 +1,22 @@
+### The posts list
+GET http://localhost:8080/posts
+
+### Get one post
+GET http://localhost:8080/posts/:id
+
+### Create a post
+POST http://localhost:8080/posts/
+{
+  "title": "My first post",
+  "body": "This is my first post"
+}
+
+### Update a post
+PUT http://localhost:8080/posts/652b75bb4264eda11c309c20
+
+{
+  "title": "My first post - changed",
+}
+
+### delete contact
+DELETE http://localhost:8080/posts/:id
