@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "start-prod": "node server.js",
-    "swagger": "node swagger.js"
+    "swagger": "node swagger.js",
+    "deploy": "npm run swagger && npm run start-prod"
   },
   "keywords": [],
   "author": "",
