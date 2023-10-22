@@ -26,6 +26,9 @@ const User = mongoose.model('User', UserSchema, 'users')
 const getUser = async (req, res) => {
   const { id } = req.params
   const user = await User.findById(id)
+  if (!user) {
+    return res.status(404).send({ message: 'User not found' })
+  }
   res.json(user)
 }
 
@@ -61,6 +64,7 @@ const updateUser = async (req, res) => {
 }
 
 module.exports = {
+  User,
   getUser,
   createUser,
   updateUser

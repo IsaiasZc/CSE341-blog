@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
+const { User } = require('./users.js')
 
 const PostSchema = new Schema({
   title: {
@@ -13,6 +14,10 @@ const PostSchema = new Schema({
   date: {
     type: Date,
     default: Date.now()
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 
@@ -26,19 +31,26 @@ const getAllPosts = async (req, res) => {
 const getPost = async (req, res) => {
   const { id } = req.params
   const post = await Post.findById(id)
+  if (!post) {
+    return res.status(404).send({ message: 'Post not found' })
+  }
   res.json(post)
 }
 
 const createPost = async (req, res) => {
-  const requiredFields = ['title', 'body']
-
+  const requiredFields = ['title', 'body', 'userId']
   const { body } = req
+
   const invalid = requiredFields.some(field => !body[field])
+  if (invalid) return res.status(400).json({ msg: 'Please provide title and body' })
 
-  console.log(body)
+  const { userId } = body
+  if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(400).json({ msg: 'Please provide a valid userId' })
 
-  if (invalid) {
-    return res.status(400).json({ msg: 'Please provide title and body' })
+  try {
+    await User.findById(userId)
+  } catch (err) {
+    return res.status(400).json({ msg: 'Please provide a valid userId' })
   }
 
   const newPost = new Post(body)

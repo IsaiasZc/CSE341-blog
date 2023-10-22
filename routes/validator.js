@@ -2,8 +2,9 @@ const { body, validationResult } = require('express-validator')
 
 const postValidationRules = () => {
   return [
-    body('title').isLength({ min: 1 }),
-    body('body').isLength({ min: 1 })
+    body('title').notEmpty(),
+    body('body').notEmpty(),
+    body('userId').notEmpty()
   ]
 }
 
@@ -24,8 +25,8 @@ const validatePost = (req, res, next) => {
 const userValidationRules = () => {
   return [
     body('username').notEmpty(),
-    body('password').notEmpty(),
-    body('email').isEmail().isLength({ min: 6 }).custom((value) => /\d/.test(value)).withMessage('The password must containt at least a number') // at least a number
+    body('email').isEmail(),
+    body('password').notEmpty().isLength({ min: 6 }).custom((value) => /\d/.test(value)).withMessage('The password must containt at least one digit') // at least a number
   ]
 }
 
