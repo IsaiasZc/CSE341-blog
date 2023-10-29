@@ -1,3 +1,5 @@
+import { Request, Response } from "express"
+
 const mongoose = require('mongoose')
 
 const { Schema } = mongoose
@@ -21,9 +23,9 @@ const UserSchema = new Schema({
   }
 })
 
-const User = mongoose.model('User', UserSchema, 'users')
+export const User = mongoose.model('User', UserSchema, 'users')
 
-const getUser = async (req, res) => {
+const getUser = async (req: Request, res: Response) => {
   const { id } = req.params
   const user = await User.findById(id)
   if (!user) {
@@ -32,7 +34,7 @@ const getUser = async (req, res) => {
   res.json(user)
 }
 
-const createUser = async (req, res) => {
+const createUser = async (req: Request, res: Response) => {
   const requiredFields = ['username', 'password', 'email']
 
   const { body } = req
@@ -50,7 +52,7 @@ const createUser = async (req, res) => {
   res.status(201).json({ id: newUser._id })
 }
 
-const updateUser = async (req, res) => {
+const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params
   const { body } = req
 
@@ -63,8 +65,7 @@ const updateUser = async (req, res) => {
   return res.status(204).send()
 }
 
-module.exports = {
-  User,
+export default {
   getUser,
   createUser,
   updateUser

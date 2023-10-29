@@ -9,10 +9,10 @@ const connectDB = async () => {
     })
 
     console.log(`MongoDB Connected: ${conn.connection.host}`)
-  } catch (err) {
+  } catch (err: any) {
     console.log(`Error: ${err.message}`)
     process.exit(1)
   }
 }
 
-module.exports = connectDB
+export default connectDB

@@ -1,6 +1,6 @@
-const { Router } = require('express')
-const users = require('../controllers/users.js')
-const { userValidationRules, validateUser } = require('./validator.js')
+import Router from 'express'
+import users from '../controllers/users'
+import { userValidationRules, validateUser } from './validator'
 
 const router = Router()
 

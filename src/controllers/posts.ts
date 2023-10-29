@@ -1,6 +1,8 @@
-const mongoose = require('mongoose')
+import { Request, Response } from 'express'
+import mongoose from "mongoose"
+import { User } from './users'
+
 const { Schema } = mongoose
-const { User } = require('./users.js')
 
 const PostSchema = new Schema({
   title: {
@@ -23,12 +25,12 @@ const PostSchema = new Schema({
 
 const Post = mongoose.model('Post', PostSchema, 'posts')
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (req: Request, res: Response) => {
   const posts = await Post.find()
   res.status(200).json(posts)
 }
 
-const getPost = async (req, res) => {
+const getPost = async (req: Request, res: Response) => {
   const { id } = req.params
   const post = await Post.findById(id)
   if (!post) {
@@ -37,7 +39,7 @@ const getPost = async (req, res) => {
   res.json(post)
 }
 
-const createPost = async (req, res) => {
+const createPost = async (req: Request, res: Response) => {
   const requiredFields = ['title', 'body', 'userId']
   const { body } = req
 
@@ -59,7 +61,7 @@ const createPost = async (req, res) => {
   res.status(201).json({ id: newPost._id })
 }
 
-const updatePost = async (req, res) => {
+const updatePost = async (req: Request, res: Response) => {
   const { id } = req.params
   const { body } = req
 
@@ -72,7 +74,7 @@ const updatePost = async (req, res) => {
   return res.status(204).send()
 }
 
-const deletePost = async (req, res) => {
+const deletePost = async (req: Request, res: Response) => {
   const { id } = req.params
 
   try {
@@ -84,7 +86,7 @@ const deletePost = async (req, res) => {
   return res.status(200).send({ message: 'Post deleted' })
 }
 
-module.exports = {
+export default {
   getAllPosts,
   getPost,
   createPost,

@@ -1,10 +1,10 @@
-const express = require('express')
-const dotenv = require('dotenv')
-const connectDB = require('./db/connect.js')
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('./swagger.json')
-const router = require('./routes/index.js')
-const cors = require('cors')
+import express from 'express'
+import dotenv from 'dotenv'
+import connectDB from './db/connect'
+import swaggerUi from 'swagger-ui-express'
+import swaggerDocument from '../swagger.json'
+import router from './routes/index'
+import cors from 'cors'
 
 const app = express()
 dotenv.config()
