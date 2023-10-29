@@ -10,4 +10,4 @@ router.post('/', userValidationRules(), validateUser, users.createUser)
 
 router.put('/:id', users.updateUser)
 
-module.exports = router
+export default router

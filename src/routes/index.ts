@@ -1,6 +1,7 @@
-const { Router } = require('express')
-const postsRouter = require('./posts')
-const usersRouter = require('./users')
+import Router from 'express'
+import postsRouter from './posts'
+import usersRouter from './users'
+
 
 const router = Router()
 

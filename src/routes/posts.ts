@@ -14,4 +14,4 @@ router.put('/:id', posts.updatePost)
 
 router.delete('/:id', posts.deletePost)
 
-module.exports = router
+export default router

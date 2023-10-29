@@ -7,4 +7,4 @@ const router = express.Router()
 router.use('/api-docs', swaggerUi.serve) // swaggerUi.serve()
 router.get('/api-docs', swaggerUi.setup(swaggerDocument))
 
-module.exports = router
+export default router
