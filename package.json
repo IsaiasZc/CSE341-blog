@@ -9,7 +9,7 @@
     "start": "ts-node-dev src/server.ts",
     "start-prod": "node build/src/server.js",
     "swagger": "node swagger.js",
-    "deploy": "npm run swagger && npm run start-prod"
+    "deploy": "npm run swagger && npm run tsc && npm run start-prod"
   },
   "keywords": [],
   "author": "",

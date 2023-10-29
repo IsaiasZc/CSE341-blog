@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateUser = exports.userValidationRules = exports.validatePost = exports.postValidationRules = void 0;
 const { body, validationResult } = require('express-validator');
 const postValidationRules = () => {
     return [
@@ -8,6 +9,7 @@ const postValidationRules = () => {
         body('userId').notEmpty()
     ];
 };
+exports.postValidationRules = postValidationRules;
 const validatePost = (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
@@ -19,6 +21,7 @@ const validatePost = (req, res, next) => {
         errors: extractedErrors
     });
 };
+exports.validatePost = validatePost;
 const userValidationRules = () => {
     return [
         body('username').notEmpty(),
@@ -26,6 +29,7 @@ const userValidationRules = () => {
         body('password').notEmpty().isLength({ min: 6 }).custom((value) => /\d/.test(value)).withMessage('The password must containt at least one digit') // at least a number
     ];
 };
+exports.userValidationRules = userValidationRules;
 const validateUser = (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
@@ -37,10 +41,11 @@ const validateUser = (req, res, next) => {
         errors: extractedErrors
     });
 };
-module.exports = {
-    postValidationRules,
-    validatePost,
-    userValidationRules,
-    validateUser
+exports.validateUser = validateUser;
+exports.default = {
+    postValidationRules: exports.postValidationRules,
+    validatePost: exports.validatePost,
+    userValidationRules: exports.userValidationRules,
+    validateUser: exports.validateUser
 };
 //# sourceMappingURL=validator.js.map

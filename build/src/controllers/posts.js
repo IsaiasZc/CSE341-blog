@@ -86,7 +86,7 @@ const deletePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     return res.status(200).send({ message: 'Post deleted' });
 });
-module.exports = {
+exports.default = {
     getAllPosts,
     getPost,
     createPost,
