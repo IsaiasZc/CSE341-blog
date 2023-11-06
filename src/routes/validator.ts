@@ -48,7 +48,11 @@ export const validateUser = (req: Request, res: Response, next: NextFunction) =>
 
 export const authValidationRules = (req: Request, res: Response, next: NextFunction) => {
   console.log(req.isAuthenticated())
-  req.isAuthenticated() ? next() : res.redirect('/auth/google')
+  req.isAuthenticated() && next()
+
+  return res.status(401).send({
+    message: 'You must be logged in to perform this action'
+  })
 }
 
 export default {
