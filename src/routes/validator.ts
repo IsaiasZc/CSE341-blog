@@ -46,9 +46,15 @@ export const validateUser = (req: Request, res: Response, next: NextFunction) =>
   })
 }
 
+export const authValidationRules = (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.isAuthenticated())
+  req.isAuthenticated() ? next() : res.redirect('/auth/google')
+}
+
 export default {
   postValidationRules,
   validatePost,
   userValidationRules,
-  validateUser
+  validateUser,
+  authValidationRules
 }

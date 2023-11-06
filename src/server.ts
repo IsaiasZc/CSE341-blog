@@ -26,13 +26,14 @@ app
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
   .use(cors())
   .use(express.json())
-  .use('/', router)
   .use(passport.initialize())
   .use(session({
     secret: 'patito',
     resave: false,
     saveUninitialized: false
   }))
+  .use(passport.session())
+  .use('/', router)
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 

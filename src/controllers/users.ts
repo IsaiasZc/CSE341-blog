@@ -9,10 +9,6 @@ const UserSchema = new Schema({
     type: String,
     required: [true, 'Please provide a username']
   },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password with at least 6 characters']
-  },
   email: {
     type: String,
     required: [true, 'Please provide an email']
@@ -28,6 +24,9 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now()
+  },
+  image: {
+    type: String
   },
   googleId: {
     type: String,
@@ -47,7 +46,7 @@ const getUser = async (req: Request, res: Response) => {
 }
 
 const createUser = async (req: Request, res: Response) => {
-  const requiredFields = ['username', 'password', 'email']
+  const requiredFields = ['username', 'email', 'googleId']
 
   const { body } = req
   const invalid = requiredFields.some(field => !body[field])
