@@ -35,11 +35,11 @@ app
   .use(passport.session())
   .use('/', router)
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  // res.redirect('/')
-  res.end('Logged in!')
-})
+// app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+//   // res.redirect('/')
+//   res.end('Logged in!')
+// })
 
 app.listen(PORT, () => console.log(`It's working on port ${PORT}`))

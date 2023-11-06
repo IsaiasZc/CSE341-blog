@@ -8,6 +8,6 @@ const router = Router()
 
 router.use('/posts', postsRouter)
 router.use('/users', usersRouter)
-router.use('/auth', authRouter)
+router.use('/google', authRouter)
 
 export default router
