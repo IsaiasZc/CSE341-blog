@@ -5,6 +5,9 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerDocument from '../swagger.json'
 import router from './routes/index'
 import cors from 'cors'
+import passport from 'passport'
+import Oauth from './authenticate'
+import session from 'express-session'
 
 const app = express()
 dotenv.config()
@@ -16,11 +19,26 @@ const options = {
 
 // connect to database
 connectDB()
+// prepare OAuth
+Oauth()
 
 app
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
   .use(cors())
   .use(express.json())
   .use('/', router)
+  .use(passport.initialize())
+  .use(session({
+    secret: 'patito',
+    resave: false,
+    saveUninitialized: false
+  }))
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+  // res.redirect('/')
+  res.end('Logged in!')
+})
 
 app.listen(PORT, () => console.log(`It's working on port ${PORT}`))

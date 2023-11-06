@@ -17,9 +17,21 @@ const UserSchema = new Schema({
     type: String,
     required: [true, 'Please provide an email']
   },
+  firstName: {
+    type: String,
+    required: [true, 'Please provide a first name']
+  },
+  lastName: {
+    type: String,
+    required: [true, 'Please provide a last name']
+  },
   date: {
     type: Date,
     default: Date.now()
+  },
+  googleId: {
+    type: String,
+    required: true
   }
 })
 
