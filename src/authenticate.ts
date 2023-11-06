@@ -19,7 +19,7 @@ const Oauth = () => {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID || '',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    callbackURL: `http://${process.env.DOCS_HOST}/google/callback`
+    callbackURL: `${process.env.DOCS_SCHEME}://${process.env.DOCS_HOST}/google/callback`
   },
   async  (accessToken, refreshToken, profile, cb) => {
 
