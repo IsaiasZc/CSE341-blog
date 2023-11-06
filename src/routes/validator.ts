@@ -48,11 +48,24 @@ export const validateUser = (req: Request, res: Response, next: NextFunction) =>
 
 export const authValidationRules = (req: Request, res: Response, next: NextFunction) => {
   console.log(req.isAuthenticated())
-  req.isAuthenticated() && next()
+  if(req.isAuthenticated()) {
+    return next()
+
+  }
 
   return res.status(401).send({
     message: 'You must be logged in to perform this action'
   })
+}
+
+export const validateLogged = (req: Request, res: Response, next: NextFunction) => {
+
+  if (req.isAuthenticated()) {
+    res.redirect('/')
+  } else {
+    return next()
+  }
+
 }
 
 export default {

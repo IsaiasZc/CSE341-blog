@@ -4,7 +4,7 @@ import { authValidationRules, postValidationRules, validatePost } from './valida
 
 const router = Router()
 
-router.get('/', posts.getAllPosts)
+router.get('/', authValidationRules, posts.getAllPosts)
 
 router.get('/:id', posts.getPost)
 
